@@ -2,7 +2,7 @@
 48430 Embedded C - Assignment 1
 Name: Michael Codner
 Student ID: 11989668
-Date of submission:
+Date of submission: 30/03/2016
 A brief statement on what you could achieve (less than 50 words):
 Everything
 
@@ -56,9 +56,22 @@ Check if an integer n is a triangular number.
 return 1 - if n is triangular
 return 0 - if n is not triangular
 **********************************************************************/
-char isTriangle(int n){
-    // TODO: find out if necessary
-    return 0;
+char isTriangle(int input){
+    int currentTriNum = 0;
+    int n = 0;
+
+    while (currentTriNum < input)
+    {
+        currentTriNum += n;
+        n++;
+    }
+
+    if (currentTriNum != input) {
+        return 0;
+    }
+    else {
+        return 1;
+    }
 }
 
 /**********************************************************************
@@ -83,7 +96,11 @@ int printEvenTriangle (int size) {
 returns the triangle number for the nth level of the triangle
 **********************************************************************/
 int triangularNumber (int n) {
-    return n * (n + 1) / 2;
+    int triangle = 0;
+    for (int i = 1; i <= n; i++) {
+        triangle += i;
+    }
+    return triangle;
 }
 
 /**********************************************************************
