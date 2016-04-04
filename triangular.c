@@ -87,7 +87,7 @@ int printEvenTriangle (int size) {
             highest = triangle;
         }
     }
-    printf("\n");
+    printf(" \n");
     return highest;
 }
 
