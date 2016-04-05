@@ -2,7 +2,7 @@
 48430 Embedded C - Assignment 1
 Name: Michael Codner
 Student ID: 11989668
-Date of submission: 04/04/2016
+Date of submission: 05/04/2016
 A brief statement on what you could achieve (less than 50 words):
 Everything
 
@@ -20,24 +20,29 @@ List of header files - do NOT use any other header files.
 Function prototypes - do NOT change the given prototypes. However you
 may define your own functions if required.
 **********************************************************************/
-char isOdd(int); /* Check if an integer is odd */
-char isTriangle(int); /* Check if an integer is a triangular number */
-void printTriangle(int); /* Print a triangle corresponding to an int */
-int printEvenTriangle (int);
-int triangularNumber (int);
+char isOdd(int);
+
+/* Check if an integer is odd */
+char isTriangle(int);
+
+/* Check if an integer is a triangular number */
+void printTriangle(int);
+
+/* Print a triangle corresponding to an int */
+int printEvenTriangle(int);
 
 
 /**********************************************************************
 Main
 **********************************************************************/
-int main(void){
+int main(void) {
     int size;
     printf("Enter a number between 0 and 200>");
-    scanf("%d", &size); // Receive input and store in the 'size' integer
+    scanf("%d", &size); /* Receive input and store in the 'size' integer */
     printf("Printing even triangular numbers below %d:\n", size);
-    int highest = printEvenTriangle(size); // Print the even triangle numbers and store the highest number
+    int highest = printEvenTriangle(size); /* Print the even triangle numbers and store the highest number */
     printf("The last even triangular number is %d. Printing the triangle:\n", highest);
-    printTriangle(size); // Print the whole triangle
+    printTriangle(size); /* Print the whole triangle */
     return 0;
 }
 
@@ -47,7 +52,7 @@ Check if an integer n is odd.
 return 1 - if odd
 return 0 - otherwise
 **********************************************************************/
-char isOdd(int n){
+char isOdd(int n) {
     return n % 2 == 1;
 }
 
@@ -56,12 +61,11 @@ Check if an integer n is a triangular number.
 return 1 - if n is triangular
 return 0 - if n is not triangular
 **********************************************************************/
-char isTriangle(int input){
+char isTriangle(int input) {
     int currentTriNum = 0;
     int n = 0;
 
-    while (currentTriNum < input)
-    {
+    while (currentTriNum < input) {
         currentTriNum += n;
         n++;
     }
@@ -78,29 +82,17 @@ char isTriangle(int input){
 Prints the even triangle numbers
 returns the highest even number
 **********************************************************************/
-int printEvenTriangle (int size) {
-    int highest = 1; // Store the highest even number
-    for (int i = 1; i < size; i++) {
-        int triangle = triangularNumber(i); // Get triangle number for current iteration
-        if (triangle % 2 == 0 && triangle <= size) { // Check if the triangle number is even and less than the input
-            printf("   %d", triangle);
-            highest = triangle;
+int printEvenTriangle(int size) {
+    int highest = 1; /* Store the highest even number */
+    int i;
+    for (i = 1; i <= size; i++) {
+        if (!isOdd(i) && isTriangle(i)) { /* Check if the number is even and triangular */
+            printf("   %d", i);
+            highest = i; /* Update highest even number */
         }
     }
     printf(" \n");
     return highest;
-}
-
-
-/**********************************************************************
-returns the triangle number for the nth level of the triangle
-**********************************************************************/
-int triangularNumber (int n) {
-    int triangle = 0;
-    for (int i = 1; i <= n; i++) {
-        triangle += i;
-    }
-    return triangle;
 }
 
 /**********************************************************************
@@ -111,14 +103,17 @@ shape. e.g. 10 is a triangular number, therefore the function prints
 ** ** 06
 ** ** ** 10
 **********************************************************************/
-void printTriangle(int size){
-    for (int i = 1; i < size; i++) {
-        int triangle = triangularNumber(i); // Get triangle number for current iteration
-        if (triangle <= size) {
-            for (int n = 1; n < i; n++){
-                printf("** ");
+void printTriangle(int size) {
+    int i;
+    int count = 1; /* Used to count the number of *'s */
+    for (i = 1; i <= size; i++) {
+        if (isTriangle(i)) {
+            int n;
+            for (n = 1; n < count; n++) {
+                printf("** "); /* Print the right number of *'s */
             }
-            printf("%02d \n", triangle);
+            printf("%02d \n", i); /* Print the number padded with zeros */
+            count++;
         }
     }
 }
