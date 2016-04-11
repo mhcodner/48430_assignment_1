@@ -2,7 +2,7 @@
 48430 Embedded C - Assignment 1
 Name: Michael Codner
 Student ID: 11989668
-Date of submission: 05/04/2016
+Date of submission: 11/04/2016
 A brief statement on what you could achieve (less than 50 words):
 Everything
 
@@ -14,21 +14,23 @@ Nothing
 /**********************************************************************
 List of header files - do NOT use any other header files.
 **********************************************************************/
-#include<stdio.h>
+#include <stdio.h>
 
 /**********************************************************************
 Function prototypes - do NOT change the given prototypes. However you
 may define your own functions if required.
 **********************************************************************/
-char isOdd(int);
 
 /* Check if an integer is odd */
-char isTriangle(int);
+char isOdd(int);
 
 /* Check if an integer is a triangular number */
-void printTriangle(int);
+char isTriangle(int);
 
 /* Print a triangle corresponding to an int */
+void printTriangle(int);
+
+/* Prints the even triangular numbers <= the input */
 int printEvenTriangle(int);
 
 
@@ -62,20 +64,15 @@ return 1 - if n is triangular
 return 0 - if n is not triangular
 **********************************************************************/
 char isTriangle(int input) {
-    int currentTriNum = 0;
-    int n = 0;
+    int currentTriNum = 0, n = 0; /* n is used as loop index,
+                                   * currentTriNum is used as the current triangular number for the loop index  */
 
     while (currentTriNum < input) {
-        currentTriNum += n;
+        currentTriNum += n; /* Triangular numbers are the sum from 1 to n */
         n++;
     }
 
-    if (currentTriNum != input) {
-        return 0;
-    }
-    else {
-        return 1;
-    }
+    return currentTriNum == input; /* The input is triangular if it is equal to the currentTriNum */
 }
 
 /**********************************************************************
@@ -83,11 +80,11 @@ Prints the even triangle numbers
 returns the highest even number
 **********************************************************************/
 int printEvenTriangle(int size) {
-    int highest = 1; /* Store the highest even number */
+    int highest = 1; /* Store the highest even number, default is 1 because that is the lowest triangular number */
     int i;
     for (i = 1; i <= size; i++) {
         if (!isOdd(i) && isTriangle(i)) { /* Check if the number is even and triangular */
-            printf("   %d", i);
+            printf("   %d", i); /* Print the even triangular number left-padded with 3 spaces */
             highest = i; /* Update highest even number */
         }
     }
@@ -106,8 +103,8 @@ shape. e.g. 10 is a triangular number, therefore the function prints
 void printTriangle(int size) {
     int i;
     int count = 1; /* Used to count the number of *'s */
-    for (i = 1; i <= size; i++) {
-        if (isTriangle(i)) {
+    for (i = 1; i <= size; i++) { /* loop from 1 to the input number */
+        if (isTriangle(i)) { /* Check if current iteration is a triangular number */
             int n;
             for (n = 1; n < count; n++) {
                 printf("** "); /* Print the right number of *'s */
