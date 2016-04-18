@@ -42,9 +42,11 @@ int main(void) {
     printf("Enter a number between 0 and 200>");
     scanf("%d", &size); /* Receive input and store in the 'size' integer */
     printf("Printing even triangular numbers below %d:\n", size);
-    int highest = printEvenTriangle(size); /* Print the even triangle numbers and store the highest number */
-    printf("The last even triangular number is %d. Printing the triangle:\n", highest);
-    printTriangle(size); /* Print the whole triangle */
+    if (size >= 6) { /* Solution only prints numbers >= 6 */
+        int highest = printEvenTriangle(size); /* Print the even triangle numbers and store the highest number */
+        printf("The last even triangular number is %d. Printing the triangle:\n", highest);
+        printTriangle(highest); /* Print the whole triangle up to the highest even number */
+    }
     return 0;
 }
 
@@ -80,11 +82,16 @@ Prints the even triangle numbers
 returns the highest even number
 **********************************************************************/
 int printEvenTriangle(int size) {
-    int highest = 1; /* Store the highest even number, default is 1 because that is the lowest triangular number */
+    int highest = 0; /* Store the highest even number, default is 1 because that is the lowest triangular number */
     int i;
     for (i = 1; i <= size; i++) {
         if (!isOdd(i) && isTriangle(i)) { /* Check if the number is even and triangular */
-            printf("   %d", i); /* Print the even triangular number left-padded with 3 spaces */
+            if (i < 100) {
+                printf("   %d", i); /* Print the even triangular number left-padded with 3 spaces */
+            }
+            else {
+                printf("  %d", i); /* Print the even triangular number left-padded with 3 spaces */
+            }
             highest = i; /* Update highest even number */
         }
     }
