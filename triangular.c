@@ -2,7 +2,7 @@
 48430 Embedded C - Assignment 1
 Name: Michael Codner
 Student ID: 11989668
-Date of submission: 11/04/2016
+Date of submission: 18/04/2016
 A brief statement on what you could achieve (less than 50 words):
 Everything
 
